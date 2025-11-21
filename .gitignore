@@ -3,5 +3,6 @@
 *.hg
 *.DS_Store
 *.o
+*.zip
 *.exe
 CVS
