@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include <stdlib.h>
-#define WIDTH 800
+#include <stdio.h>
+#define WIDTH 810
 
 // Function inits
 void update(); // Update and draw one frame
@@ -22,6 +23,20 @@ int main() {
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
+        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            int x = GetMouseX() - 10;
+            int y = GetMouseY() - 70;
+            if(!(x < 0 || x > WIDTH || y < 0 || y > WIDTH)) {
+                x /= (WIDTH / 3);
+                y /= (WIDTH / 3);
+                if(game[x][y] == 0) {
+                    game[x][y] = turn;
+                    if(turn == 1) turn = 2;
+                    else if(turn == 2) turn = 1;
+                    check_game();
+                }
+            }
+        }
         update();
     }
 
@@ -46,6 +61,18 @@ void update() {
         DrawRectangle(10 + (WIDTH * 2) / 3, 70, 5, WIDTH, DARKGRAY); // vertical bar 2
         DrawRectangle(10, 70 + WIDTH / 3, WIDTH, 5, DARKGRAY); // horizontal bar 1
         DrawRectangle(10, 70 + (WIDTH * 2) / 3, WIDTH, 5, DARKGRAY); // horizontal bar 2
+        // Draw grid
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                if(game[i][j] == 0) continue;
+                if(game[i][j] == 1) {
+                    DrawText("X", i * (WIDTH / 3) + 40, j * (WIDTH / 3) + 80, (WIDTH / 3) - 10, BLUE);
+                }
+                if(game[i][j] == 2) {
+                    DrawText("O", i * (WIDTH / 3) + 40, j * (WIDTH / 3) + 80, (WIDTH / 3) - 10, RED);
+                }
+            }
+        }
     EndDrawing();
 }
 
