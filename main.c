@@ -17,9 +17,10 @@ int turn = 1; // 1 - X, 2 - 0
 int main() {
     const int screenWidth = WIDTH + 20;
     const int screenHeight = WIDTH + 80;
+    Image icon = LoadImage("./resources/xo.png");
 
     InitWindow(screenWidth, screenHeight, "tic tac toe");
-
+    SetWindowIcon(icon);
     SetTargetFPS(60);
 
     // Main game loop
