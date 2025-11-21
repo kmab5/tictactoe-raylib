@@ -1,0 +1,7 @@
+*.exe
+*.svn
+*.hg
+*.DS_Store
+*.o
+*.exe
+CVS
